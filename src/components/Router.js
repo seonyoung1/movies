@@ -10,9 +10,9 @@ export default () => (
             <HeaderContainer />
             <Switch>
                 <Route path="/" exact component={HomeContainer} />
-                <Route path="/movie/:id" component={DetailContainer} />
+                <Route path="/:id" component={DetailContainer} />
                 {/*해당하는게 없으면 / 로 리다이렉트*/}
-                {/*<Redirect from="*" to="/" />*/}
+                <Redirect from="*" to="/" />
             </Switch>
         </>
     </Router>

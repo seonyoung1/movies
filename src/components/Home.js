@@ -33,7 +33,7 @@ const Container = styled.div`
 const Poster = ({ id, url, title }) => {
     return(
         <li>
-            <Link to={`/movie/${id}`}>
+            <Link to={`/${id}`}>
                 <div className="poster">
                     <img src={`https://image.tmdb.org/t/p/w500${url}`} alt="" />
                 </div>
@@ -45,7 +45,7 @@ const Poster = ({ id, url, title }) => {
 
 const Home = ({ movies, isLoading }) => {
     //console.log("Home~");
-    console.log(movies, isLoading);
+    //console.log(movies);
     return (
         <Container>
             <button>눌러보장</button>
