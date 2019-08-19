@@ -1,9 +1,12 @@
 import React from 'react';
+import GlobalStyled from "../assets/GlobalStyles";
+import Router from "./Router";
 
 const App = () => {
     return (
-        <div className="App">
-            hello~
+        <div className="wrapper">
+            <Router />
+            <GlobalStyled />
         </div>
     )
 };

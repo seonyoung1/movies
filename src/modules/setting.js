@@ -1,21 +1,27 @@
 import { createAction, handleActions } from "redux-actions";
 
 //액션타입정의 :
-const MODE = "setting/MODE";
+const PAGE_SET = "setting/PAGE_SET";
+const GET_CONTENTS = "setting/GET_CONTENTS";
 
-export const modeChange = createAction(MODE, current => current);
+export const pageSet = createAction(PAGE_SET, number => number);
+export const getContents = createAction(GET_CONTENTS, contents => contents );
 
 const initialState = {
-    current: 0, //현재 선택된 탭 index
+    index: 0,
+    page: 1,
     contents: [],
-    mode: "",
-    isLoading: false
 };
 
 export default handleActions({
-    [MODE]: (state, action) => ({
+    [GET_CONTENTS]: (state, action) => ({
         ...state,
-        mode: action.payload
+        contents: state.contents.concat(action.payload),
+        index: state.index + 1
+    }),
+    [PAGE_SET]: (state, action) => ({
+        ...state,
+        page: action.payload
     }),
 
 }, initialState);
