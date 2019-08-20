@@ -12,7 +12,7 @@ class HomeContainer extends Component {
         prevMovies: [],
         movies: [],
         error: null,
-        localPage: 1,
+        localPage: 0,
     };
 
     constructor(props) {
@@ -28,19 +28,16 @@ class HomeContainer extends Component {
     componentWillUnmount() {
         // 언마운트 될때에, 스크롤링 이벤트 제거
         window.removeEventListener("scroll", this.handleScroll);
-
-        const { SetActions, page, leavePage } = this.props;
-        SetActions.leavePageSave(page);
-        console.log(leavePage);
     }
 
     nowPlayingList = async () => {
         try {
             const { SetActions, page } = this.props;
-            SetActions.pageSet(page + 1);
+            //SetActions.pageSet(page + 1);
             const { data: { results : movies }} = await moviesApi.nowPlaying(page);
             this.setState({movies});
             this.getContent();
+
         } catch {
             this.setState({error: "영화 목록을 가져오는데 실패했습니다."})
         } finally {
