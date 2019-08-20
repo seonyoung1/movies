@@ -3,17 +3,17 @@ import { createAction, handleActions } from "redux-actions";
 //액션타입정의 :
 const PAGE_SET = "setting/PAGE_SET";
 const GET_CONTENTS = "setting/GET_CONTENTS";
-const TOGGLE = "setting/TOGGLE";
+const LEAVE_PAGE_SAVE = "setting/TOGGLE";
 
 export const pageSet = createAction(PAGE_SET, number => number);
 export const getContents = createAction(GET_CONTENTS, contents => contents );
-export const toggleFirst = createAction(TOGGLE);
+export const leavePageSave = createAction(LEAVE_PAGE_SAVE, number => number );
 
 const initialState = {
     index: 0,
     page: 1,
     contents: [],
-    isFirst: true,
+    leavePage: 1,
 };
 
 export default handleActions({
@@ -25,9 +25,9 @@ export default handleActions({
         ...state,
         page: action.payload
     }),
-    [TOGGLE]: (state, action) => ({
+    [LEAVE_PAGE_SAVE]: (state, action) => ({
         ...state,
-        isFirst: ! state.isFirst
+        leavePage: action.payload,
     }),
 
 }, initialState);

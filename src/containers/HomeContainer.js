@@ -9,14 +9,14 @@ class HomeContainer extends Component {
 
     state = {
         isLoading: true,
+        prevMovies: [],
         movies: [],
         error: null,
     };
 
     constructor(props) {
         super(props);
-        this.props.SetActions.toggleFirst();
-        console.log(this.props.isFirst);
+
     }
 
     componentDidMount() {
@@ -27,30 +27,19 @@ class HomeContainer extends Component {
     componentWillUnmount() {
         // 언마운트 될때에, 스크롤링 이벤트 제거
         window.removeEventListener("scroll", this.handleScroll);
+
+        const { SetActions, page, leavePage } = this.props;
+        SetActions.leavePageSave(page);
+        console.log(leavePage);
     }
 
     nowPlayingList = async () => {
         try {
-
-            const { data: { results : movies }} = await moviesApi.nowPlaying(this.props.page);
+            const { SetActions, page } = this.props;
+            SetActions.pageSet(page + 1);
+            const { data: { results : movies }} = await moviesApi.nowPlaying(page);
             this.setState({movies});
-
-            //console.log(this.props.contents.length, this.props.page - 1);
-            if( this.props.contents.length === ( this.props.page - 1 ) * 20 ){
-                this.getContent();
-                //console.log(`true`);
-            }
-
-            // if( this.props.isFirst ){
-            //     this.getContent();
-            //     this.props.SetActions.toggleFirst();
-            //     //console.log(1);
-            // }
-            // if( this.state.isScroll ){
-            //     this.getContent();
-            //     this.setState({ isScroll: false });
-            //     //console.log(2);
-            // }
+            this.getContent();
         } catch {
             this.setState({error: "영화 목록을 가져오는데 실패했습니다."})
         } finally {
@@ -64,10 +53,8 @@ class HomeContainer extends Component {
         let scrollTop = Math.max(document.documentElement.scrollTop, document.body.scrollTop);
         let clientHeight = document.documentElement.clientHeight ;
         if( scrollTop + clientHeight === scrollHeight ){
-            SetActions.pageSet(page + 1);
-            //console.log(`scroll : ${this.props.page}`);
+            //SetActions.pageSet(page + 1);
             this.nowPlayingList();
-            //this.setState({ isScroll: true });
         }
     };
 
@@ -93,7 +80,7 @@ class HomeContainer extends Component {
 const mapStateToProps = ({setting}) => ({
     page: setting.page,
     contents: setting.contents,
-    isFirst: setting.isFirst
+    leavePage: setting.leavePage,
 });
 
 const mapDispatchToProps = dispatch => ({
