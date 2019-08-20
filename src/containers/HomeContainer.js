@@ -12,6 +12,7 @@ class HomeContainer extends Component {
         prevMovies: [],
         movies: [],
         error: null,
+        localPage: 1,
     };
 
     constructor(props) {
@@ -51,8 +52,8 @@ class HomeContainer extends Component {
         const { SetActions, page } = this.props;
         let scrollHeight = Math.max(document.documentElement.scrollHeight, document.body.scrollHeight);
         let scrollTop = Math.max(document.documentElement.scrollTop, document.body.scrollTop);
-        let clientHeight = document.documentElement.clientHeight ;
-        if( scrollTop + clientHeight === scrollHeight ){
+        let clientHeight = document.documentElement.clientHeight + 20 ;
+        if( scrollTop + clientHeight > scrollHeight ){
             //SetActions.pageSet(page + 1);
             this.nowPlayingList();
         }

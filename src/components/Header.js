@@ -22,13 +22,20 @@ const HeaderBox = styled.div`
         }
     }
 `;
+const Button = styled(Link)`
+        position:absolute;right:0;top:0;width:50px;height:50px;color:#fff;font-size:0;
+        :after{
+            content:"";position:absolute;left:50%;top:50%;width:25px;height:25px;transform:translate(-50%,-50%);
+            background:url(${searchIcon}) no-repeat center;background-size:100% auto;
+        }
+`;
 
 const Header = () => {
     return (
         <HeaderBox>
             <div>
                 <h1><Link to="/">nowPlaying</Link></h1>
-                <button>Search</button>
+                <Button to="/search">Search</Button>
             </div>
         </HeaderBox>
     );
