@@ -78,7 +78,7 @@ class HomeContainer extends Component {
     handleScroll = () => {
         let scrollHeight = Math.max(document.documentElement.scrollHeight, document.body.scrollHeight);
         let scrollTop = Math.max(document.documentElement.scrollTop, document.body.scrollTop);
-        let clientHeight = document.documentElement.clientHeight + 100;
+        let clientHeight = document.documentElement.clientHeight + 500;
 
         // this.setState({scroll1: Math.floor(scrollTop + clientHeight) });
         // this.setState({scroll2: scrollHeight});
