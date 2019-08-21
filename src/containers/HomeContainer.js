@@ -30,6 +30,7 @@ const HomeContainer = ({ SetActions, page, lastId, contents }) => {
     let timer;
 
     useEffect(() => {
+        console.log(contents);
         const getData = async (number) => {
             try{
                 //setPlayPage(prev => prev + 1, () => console.log(playPage));

@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Redirect, Switch } from "react-router-dom";
-import HomeContainer from "../containers/HomeContainer"
+import ScrollMemory from "react-router-scroll-memory";
+import HomeContainer from "../containers/HomeContainer_class"
 import DetailContainer from "../containers/DetailContainer"
 import SearchContainer from "../containers/SearchContainer";
 import Header from "./Header";
@@ -8,6 +9,7 @@ import Header from "./Header";
 export default () => (
     <Router>
         <>
+            <ScrollMemory />
             <Header />
             <Switch>
                 <Route path="/" exact component={HomeContainer} />

@@ -74,7 +74,7 @@ const Detail = ({ result, isLoading, error, history }) => {
             ):(
                 <>
                     <Helmet>
-                        <title>{result.original_title} | nowPlaying</title>
+                        <title>{result.original_title} | MOVIES</title>
                     </Helmet>
                     <Container>
                         <div className="info_wrap">

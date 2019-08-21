@@ -14,7 +14,6 @@ class HomeContainer extends Component {
                 dataListId: contents[contents.length - 1].id
             };
         }
-        this.scrollerRef = React.createRef();
     }
 
     state = {
@@ -89,7 +88,6 @@ class HomeContainer extends Component {
                 //alert(`스크롤 ${scrollTop + clientHeight}, ${scrollHeight}`);
                 this.setState({ playPage: this.state.playPage + 1 });
                 this.nowPlayingList(this.state.playPage);
-                //console.log("실행");
                 this.state.timer = setTimeout(() => {
                     this.setState({timer: null});
                 }, 500);

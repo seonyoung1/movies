@@ -33,7 +33,7 @@ const Search = ({ onSubmit, onChange, keyword, result, isLoading, prevSearch }) 
     return (
         <>
             <Helmet>
-                <title>Search | nowPlaying</title>
+                <title>Search | MOVIES</title>
             </Helmet>
             <Container>
                 <form onSubmit={onSubmit}>
