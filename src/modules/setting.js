@@ -11,7 +11,7 @@ export const leavePageSave = createAction(LEAVE_PAGE_SAVE, number => number );
 
 const initialState = {
     index: 0,
-    page: 1,
+    page: 0,
     contents: [],
     leavePage: 1,
 };

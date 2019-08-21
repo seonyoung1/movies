@@ -9,35 +9,29 @@ class HomeContainer extends Component {
 
     state = {
         isLoading: true,
-        prevMovies: [],
         movies: [],
         error: null,
-        localPage: 0,
+        playPage: 1, //현재 호출번호
+        apiPage: 0 //api 호출할 때 가져오는 page 번호
     };
 
-    constructor(props) {
-        super(props);
-
-    }
-
     componentDidMount() {
-        this.nowPlayingList();
+        this.nowPlayingList(this.state.playPage);
         window.addEventListener("scroll", this.handleScroll);
     }
 
     componentWillUnmount() {
-        // 언마운트 될때에, 스크롤링 이벤트 제거
         window.removeEventListener("scroll", this.handleScroll);
     }
 
-    nowPlayingList = async () => {
+    nowPlayingList = async (number) => {
         try {
-            const { SetActions, page } = this.props;
-            //SetActions.pageSet(page + 1);
-            const { data: { results : movies }} = await moviesApi.nowPlaying(page);
-            this.setState({movies});
-            this.getContent();
-
+            const response = await moviesApi.nowPlaying(number);
+            this.setState({ apiPage: response.data.page });
+            const { data: { results : movies }} = await moviesApi.nowPlaying(number);
+            //console.log("첫로딩 목록 추가");
+            this.setState({ movies });
+            await this.getContent();
         } catch {
             this.setState({error: "영화 목록을 가져오는데 실패했습니다."})
         } finally {
@@ -45,25 +39,36 @@ class HomeContainer extends Component {
         }
     };
 
-    handleScroll = () => {
-        const { SetActions, page } = this.props;
-        let scrollHeight = Math.max(document.documentElement.scrollHeight, document.body.scrollHeight);
-        let scrollTop = Math.max(document.documentElement.scrollTop, document.body.scrollTop);
-        let clientHeight = document.documentElement.clientHeight + 20 ;
-        if( scrollTop + clientHeight > scrollHeight ){
-            //SetActions.pageSet(page + 1);
-            this.nowPlayingList();
-        }
-    };
-
     getContent = () => {
         const { SetActions } = this.props;
+        //apiPage : api 호출 시 불러오는 page
+        //page : 스토어에 저장한 현재 까지 불러온 page
+        //playPage : 실제로 호출하는 page number
+        //console.log(`준비: api ${this.state.apiPage}, page ${this.props.page}, playPage ${this.state.playPage}`);
+        if( this.state.apiPage !== ( this.props.page + 1 )){
+            //console.log("조건이 맞지 않음");
+            this.setState({ playPage: this.props.page });
+            //SetActions.pageSet(this.props.page - 1); //빼야 제대로 실행
+            //console.log(`재설정: api ${this.state.apiPage}, page ${this.props.page}, playPage ${this.state.playPage}`);
+            return
+        }
         SetActions.getContents(this.state.movies);
+        SetActions.pageSet(this.state.apiPage); //스토어에 저장하는 page 번호는 중복체크할 때만 사용, 컨텐츠를 정상적으로 호출하면 해당번호 저장
+    };
+
+    handleScroll = () => {
+        let scrollHeight = Math.max(document.documentElement.scrollHeight, document.body.scrollHeight);
+        let scrollTop = Math.max(document.documentElement.scrollTop, document.body.scrollTop);
+        let clientHeight = document.documentElement.clientHeight;
+        if( scrollTop + clientHeight === scrollHeight ){
+            this.setState({ playPage: this.state.playPage + 1 });
+            this.nowPlayingList(this.state.playPage);
+        }
     };
 
     render(){
         const { page, contents } = this.props;
-        const { movies, isLoading, error } = this.state;
+        const { isLoading, error } = this.state;
         return(
             <Home
                 page={page}
