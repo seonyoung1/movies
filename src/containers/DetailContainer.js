@@ -18,7 +18,7 @@ const DetailContainer = ({ location, match, history }) => {
         }
 
         handleContent();
-        window.scrollTo(0,0);
+        //window.scrollTo(0,0);
     }, []);
 
     const handleContent = async () => {
