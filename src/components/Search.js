@@ -1,9 +1,9 @@
 import React from 'react';
 import styled from "styled-components";
 import Loader from "./Loader";
-import searchIcon from "../assets/images/search.png";
 import Poster from "./Poster";
 import Helmet from "react-helmet";
+import searchIcon from "../assets/images/search.png";
 
 const Container = styled.div`
     position:relative;width:100%;max-width:768px;margin:0 auto;padding:30px 20px;
@@ -37,7 +37,7 @@ const Search = ({ onSubmit, onChange, keyword, result, isLoading, prevSearch }) 
             </Helmet>
             <Container>
                 <form onSubmit={onSubmit}>
-                    <input type="text" name="keyword" value={keyword} onChange={onChange} placeholder="검색어를 입력하세요" />
+                    <input type="text" name="keyword" value={keyword} onChange={onChange} placeholder="Please enter a search term" />
                     <button type="submit">Search</button>
                 </form>
                 { isLoading ? (

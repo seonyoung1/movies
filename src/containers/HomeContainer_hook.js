@@ -85,7 +85,7 @@ const HomeContainer = ({ SetActions, page, contents }) => {
 
         if( Math.floor(scrollTop + clientHeight) > scrollHeight ){
             if( !timer ){
-                //alert(`스크롤 ${scrollTop + clientHeight}, ${scrollHeight}`);
+                alert(`스크롤 ${scrollTop + clientHeight}, ${scrollHeight}`);
                 setPlayPage(number => number+1);
                 nowPlayingList(playPage);
 
