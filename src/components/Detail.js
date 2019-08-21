@@ -120,14 +120,18 @@ const Detail = ({ result, isLoading, error, history }) => {
                         { result.videos.results.length > 0 && (
                             <div className="videos">
                                 <h2>♣ Videos</h2>
-                                {result.videos.results.map(item =>
-                                    <div className="item" key={item.id}>
-                                        <p>{item.name}</p>
-                                        <div className="youtube" key={item.key}>
-                                            <iframe src={`https://www.youtube.com/embed/${item.key}`}>
-                                            </iframe>
+                                {result.videos.results.map((item, index) => index < 5
+                                    ? (
+                                        <div className="item" key={item.id}>
+                                            <p>{item.name}</p>
+                                            <div className="youtube" key={item.key}>
+                                                <iframe src={`https://www.youtube.com/embed/${item.key}`}>
+                                                </iframe>
+                                            </div>
                                         </div>
-                                    </div>
+                                    ) : (
+                                        ""
+                                    )
                                 )}
                             </div>
                         )}
