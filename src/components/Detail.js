@@ -6,24 +6,30 @@ import empty from "../assets/images/empty.jpg"
 import star from "../assets/images/star.png";
 
 const Container = styled.div`
-    position:relative;width:100%;max-width:768px;margin:0 auto;padding:30px 20px;
+    position:relative;width:100%;max-width:768px;margin:0 auto;padding:30px 20px 0;
     .go_home{
         padding:10px 15px;background-color:#576574;color:#fff;font-size:14px;border-radius:3px;
-        &.top{
-            position:absolute;right:0;top:0;
-        }
     }
     .group{margin:30px 0;text-align:center;}
     .info_wrap{display:flex;justify-content:space-between;width:100%;}
-    .poster{width:200px;}
+    .poster{
+        width:200px;
+        @media (max-width: 480px ){
+            width:100px;
+            img{width:100%;}
+        }
+    }
     .info{
         width:calc( 100% - 200px ); padding-left:20px;
         h1{font-size:24px;font-weight:bold;}
         .title_en{color:#888;font-size:14px;}
+        @media (max-width: 480px ){
+             width:calc( 100% - 100px );
+        }
     }
     .meta{
         width:100%;
-        p{line-height:2;}
+        p{padding-bottom:5px;}
         span{color:#666;}
         .dot{
             display:inline-block;width:5px;height:5px;background-color:#ccc;border-radius:50%;font-size:0;margin:2px 8px 0 8px;vertical-align:middle;
@@ -71,7 +77,6 @@ const Detail = ({ result, isLoading, error, history }) => {
                         <title>{result.original_title} | nowPlaying</title>
                     </Helmet>
                     <Container>
-                        <button className="go_home top" onClick={() => history.goBack()}>BACK</button>
                         <div className="info_wrap">
                             <div className="poster">
                                 { result.poster_path !== null ? <img src={`https://image.tmdb.org/t/p/w200${result.poster_path}`} alt={result.title} /> : <img src={empty} alt="" />}
@@ -97,7 +102,7 @@ const Detail = ({ result, isLoading, error, history }) => {
                                         </>
                                     )}
                                     {result.production_countries[0] && (
-                                        <p><span>countries :</span> {result.production_countries[0].name}</p>
+                                        <p>{result.production_countries[0].name}</p>
                                     )}
                                     {result.release_date && (
                                         <p><span>release : </span> {result.release_date}</p>
@@ -127,7 +132,7 @@ const Detail = ({ result, isLoading, error, history }) => {
                             </div>
                         )}
                         <div className="group">
-                            <button className="go_home" onClick={() => history.goBack()}>BACK</button>
+                            <button className="go_home" onClick={() => history.goBack()}>HOME</button>
                         </div>
 
                     </Container>

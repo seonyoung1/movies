@@ -8,14 +8,11 @@ import Home from "../components/Home";
 class HomeContainer extends Component {
     constructor(props) {
         super(props);
-        //console.log(props);
-
         const { contents } = this.props;
         if( contents.length > 0 ) {
             this.state = {
                 dataListId: contents[contents.length - 1].id
             };
-            //console.log(this.state.dataListId)
         }
     }
 
@@ -26,6 +23,9 @@ class HomeContainer extends Component {
         playPage: 1, //현재 호출번호
         apiPage: 0, //api 호출할 때 가져오는 page 번호
         apiListId: 0,
+        timer : null,
+        // scroll1 : 0,
+        // scroll2 : 0
     };
 
     componentDidMount() {
@@ -77,10 +77,20 @@ class HomeContainer extends Component {
     handleScroll = () => {
         let scrollHeight = Math.max(document.documentElement.scrollHeight, document.body.scrollHeight);
         let scrollTop = Math.max(document.documentElement.scrollTop, document.body.scrollTop);
-        let clientHeight = document.documentElement.clientHeight;
-        if( scrollTop + clientHeight === scrollHeight ){
-            this.setState({ playPage: this.state.playPage + 1 });
-            this.nowPlayingList(this.state.playPage);
+        let clientHeight = document.documentElement.clientHeight + 100;
+
+        // this.setState({scroll1: Math.floor(scrollTop + clientHeight) });
+        // this.setState({scroll2: scrollHeight});
+
+        if( Math.floor(scrollTop + clientHeight) > scrollHeight ){
+            if( !this.state.timer ){
+                //alert(`스크롤 ${scrollTop + clientHeight}, ${scrollHeight}`);
+                this.setState({ playPage: this.state.playPage + 1 });
+                this.nowPlayingList(this.state.playPage);
+                this.state.timer = setTimeout(() => {
+                    this.setState({timer: null});
+                }, 500);
+            }
         }
     };
 
@@ -88,12 +98,15 @@ class HomeContainer extends Component {
         const { page, contents } = this.props;
         const { isLoading, error } = this.state;
         return(
-            <Home
-                page={page}
-                movies={contents}
-                isLoading={isLoading}
-                error={error}
-            />
+            <>
+                <Home
+                    page={page}
+                    movies={contents}
+                    isLoading={isLoading}
+                    error={error}
+                />
+                {/*<p style={{position:"fixed",top:"0px",left:"0px",color:"#fff",zIndex:"100"}}>{this.state.scroll1}, {this.state.scroll2}</p>*/}
+            </>
         )
     }
 }
