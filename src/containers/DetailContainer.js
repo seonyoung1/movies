@@ -17,11 +17,11 @@ const DetailContainer = ({ location, match, history }) => {
             return history.push("/");
         }
 
-        getContents();
+        handleContent();
         window.scrollTo(0,0);
     }, []);
 
-    const getContents = async () => {
+    const handleContent = async () => {
         try{
             const res = await moviesApi.movieDetail(parsedId);
             setResult(res.data);

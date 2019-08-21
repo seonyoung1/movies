@@ -14,10 +14,12 @@ class HomeContainer extends Component {
                 dataListId: contents[contents.length - 1].id
             };
         }
+        this.scrollerRef = React.createRef();
     }
 
     state = {
         isLoading: true,
+        loading:false,
         movies: [],
         error: null,
         playPage: 1, //현재 호출번호

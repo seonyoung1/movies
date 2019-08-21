@@ -12,7 +12,7 @@ const SearchContainer = () => {
     const onSubmit = e => {
         e.preventDefault();
         if( keyword !== "" ){
-            getContents();
+            handleContent();
             //console.log(result);
         }
     };
@@ -21,7 +21,7 @@ const SearchContainer = () => {
         setKeyword(e.target.value);
     };
 
-    const getContents = async () => {
+    const handleContent = async () => {
         setIsLoading(true);
         try{
             const res = await moviesApi.search(keyword);
