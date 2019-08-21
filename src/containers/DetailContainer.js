@@ -3,30 +3,32 @@ import { moviesApi } from "../api";
 import Detail from "../components/Detail";
 
 const DetailContainer = ({ location, match, history }) => {
-    const pathname = location.pathname;
+    //const pathname = location.pathname;
     const pathId = match.params.id;
     const parsedId = parseInt(pathId);
     const [result, setResult] = useState(null);
     const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
-    console.log(`pathname: ${pathname}, pathId: ${pathId}, parsedId: ${parsedId}`);
+    //console.log(`pathname: ${pathname}, pathId: ${pathId}, parsedId: ${parsedId}`);
 
     useEffect(() => {
         //id 가 숫자가 아니면 메인으로 보내버렷
         if( isNaN(parsedId)){
             return history.push("/");
         }
-        getContent();
+
+        getContents();
+        window.scrollTo(0,0);
     }, []);
 
-    const getContent = async () => {
+    const getContents = async () => {
         try{
             const res = await moviesApi.movieDetail(parsedId);
             setResult(res.data);
         } catch {
             setError("컨텐츠를 찾을 수 없습니다");
         } finally {
-            setIsLoading(true);
+            setIsLoading(false);
         }
     };
 
@@ -35,6 +37,7 @@ const DetailContainer = ({ location, match, history }) => {
             result={result}
             error={error}
             isLoading={isLoading}
+            history={history}
         />
     );
 };

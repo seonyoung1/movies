@@ -1,12 +1,10 @@
 import React from 'react';
 import styled from "styled-components";
+import img from "../assets/images/loading.gif";
 
-const Container = styled.div`
-    display:flex;
-    align-items: center;
-    justify-content: center;
-    color: #fff;
-    width:100%; height:calc( 100vh - 80px );
+const Loading = styled.div`
+    position:fixed;left:50%;top:50%;
+    width:256px;height:34px;transform: translate(-50%,-50%);
 `;
 
-export default () => <Container>Loading...</Container>;
+export default () => <Loading><img src={img} alt="로딩중" /></Loading>;

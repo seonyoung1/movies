@@ -6,13 +6,26 @@ import { moviesApi } from "../api";
 import Home from "../components/Home";
 
 class HomeContainer extends Component {
+    constructor(props) {
+        super(props);
+        //console.log(props);
+
+        const { contents } = this.props;
+        if( contents.length > 0 ) {
+            this.state = {
+                dataListId: contents[contents.length - 1].id
+            };
+            //console.log(this.state.dataListId)
+        }
+    }
 
     state = {
         isLoading: true,
         movies: [],
         error: null,
         playPage: 1, //현재 호출번호
-        apiPage: 0 //api 호출할 때 가져오는 page 번호
+        apiPage: 0, //api 호출할 때 가져오는 page 번호
+        apiListId: 0,
     };
 
     componentDidMount() {
@@ -27,6 +40,7 @@ class HomeContainer extends Component {
     nowPlayingList = async (number) => {
         try {
             const response = await moviesApi.nowPlaying(number);
+            this.setState({ apiListId: response.data.results[response.data.results.length-1].id });
             this.setState({ apiPage: response.data.page });
             const { data: { results : movies }} = await moviesApi.nowPlaying(number);
             //console.log("첫로딩 목록 추가");
@@ -41,9 +55,13 @@ class HomeContainer extends Component {
 
     getContent = () => {
         const { SetActions } = this.props;
+        const { dataListId, apiListId } = this.state;
         //apiPage : api 호출 시 불러오는 page
         //page : 스토어에 저장한 현재 까지 불러온 page
         //playPage : 실제로 호출하는 page number
+        if( dataListId ===  apiListId){
+            return
+        }
         //console.log(`준비: api ${this.state.apiPage}, page ${this.props.page}, playPage ${this.state.playPage}`);
         if( this.state.apiPage !== ( this.props.page + 1 )){
             //console.log("조건이 맞지 않음");

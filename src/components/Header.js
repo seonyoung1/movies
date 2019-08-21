@@ -6,14 +6,15 @@ import searchIcon from "../assets/images/search.png";
 const HeaderBox = styled.div`
     position:fixed;left:0;top:0;width:100%;height:50px;background-color:rgba(0,0,0,.8);box-shadow:0 0 5px rgba(0,0,0,.3);z-index:10;
     div{
-        position:relative;width:100%; max-width:768px; margin:0 auto; padding:10px 20px;
+        position:relative;width:100%;height:100%; max-width:768px; margin:0 auto; padding:0 20px;
     }
     h1{
-        font-family: 'Lexend Deca', sans-serif; color:#fff; font-size:21px;
+        display:inline-block;font-family: 'Lexend Deca', sans-serif; color:#fff; font-size:21px; height:100%;
+        a{
+            display:block;width:100%;height:100%;padding-top:10px;padding-right:10px;color:#fff;text-decoration: none;
+        }
     }
-    a{
-        color:#fff;text-decoration: none;
-    }
+
     button{
         position:absolute;right:0;top:0;width:50px;height:50px;color:#fff;font-size:0;
         :after{
