@@ -31,11 +31,11 @@ const Button = styled(Link)`
         }
 `;
 
-const Header = () => {
+const Header = ({ setTop }) => {
     return (
         <HeaderBox>
             <div>
-                <h1><Link to="/">MOVIES</Link></h1>
+                <h1><Link to="/" onClick={() => setTop(true)}>MOVIES</Link></h1>
                 <Button to="/search">Search</Button>
             </div>
         </HeaderBox>

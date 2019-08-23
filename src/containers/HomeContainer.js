@@ -41,7 +41,6 @@ const HomeContainer = ({ SetActions, page, lastId, contents }) => {
     const [movies, setMovies] = useState([]);
     const [apiLastId, setApiLastId] = useState(null);
     const [playPage, setPlayPage] = useState(1);
-    // const [scrollLoading, setScrollLoading] = useState(null);
 
     useEffect(() => {
         if ( isBottom ){
@@ -52,7 +51,6 @@ const HomeContainer = ({ SetActions, page, lastId, contents }) => {
 
     useEffect(() => {
         if( movies.length > 0 ){
-            //console.log(`movies change`);
             if( apiLastId === lastId ){
                 //console.log("key 중복!");
                 return
@@ -63,7 +61,6 @@ const HomeContainer = ({ SetActions, page, lastId, contents }) => {
                 return
             }
             //console.log(`movies save ${apiLastId}, ${lastId}, page ${page}, play ${playPage}`);
-            // saveData();
             SetActions.getContents(movies);
             SetActions.pageSet(playPage - 1);
             SetActions.contentsLastId();
@@ -86,8 +83,8 @@ const HomeContainer = ({ SetActions, page, lastId, contents }) => {
     };
 
     const savePos = () => {
-        SetActions.scrollPos(window.scrollY);
-        // console.log(`pos ${window.scrollY}`)
+        SetActions.scrollPos(Math.ceil(window.scrollY));
+        // alert(window.scrollY);
     };
 
     return(
@@ -98,7 +95,7 @@ const HomeContainer = ({ SetActions, page, lastId, contents }) => {
                 error={error}
                 savePos={savePos}
             />
-            <p style={{position:"fixed",top:"0px",left:"0px",color:"#fff",zIndex:"100"}}>{window.scrollY}</p>
+            {/*<p style={{position:"fixed",top:"0px",left:"0px",color:"#fff",zIndex:"100"}}>{window.scrollY}</p>*/}
         </>
     )
 };

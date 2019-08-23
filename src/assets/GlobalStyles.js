@@ -9,7 +9,9 @@ const GlobalStyled = createGlobalStyle`
     *{
         box-sizing:border-box;
     }
+    html{height:100%; overflow: auto;}
     body{
+        height:100%;
         font-family:"Roboto", "Noto Sans Korean", sans-serif;
         font-size:16px;
         letter-spacing:-0.01em; line-height:1.4; -webkit-font-smoothing : antialiased;
