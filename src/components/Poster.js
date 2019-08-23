@@ -35,10 +35,10 @@ const List = styled.li`
     }
 `;
 
-const Poster = ({ id, url, title, originTitle }) => {
+const Poster = ({ id, url, title, originTitle, savePos }) => {
     return(
         <List>
-            <Link to={`/detail/${id}`}>
+            <Link to={`/detail/${id}`} onClick={savePos}>
                 <div className="poster">
                     { url !== null ? <img src={`https://image.tmdb.org/t/p/w500${url}`} alt={originTitle} /> : <img src={empty} alt="" />}
                 </div>

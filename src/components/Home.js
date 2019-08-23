@@ -7,7 +7,7 @@ const Container = styled.div`
     width:100%;max-width:768px;margin:0 auto;padding:0 20px;
 `;
 
-const Home = ({ movies, isLoading }) => {
+const Home = ({ movies, isLoading, savePos }) => {
     //console.log(movies);
     return (
         <Container>
@@ -22,6 +22,7 @@ const Home = ({ movies, isLoading }) => {
                                     url={item.poster_path}
                                     originTitle={item.original_title}
                                     title={item.title}
+                                    savePos={savePos}
                                 />
                             ))}
                         </ul>

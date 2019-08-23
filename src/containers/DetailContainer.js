@@ -16,7 +16,6 @@ const DetailContainer = ({ location, match, history }) => {
         if( isNaN(parsedId)){
             return history.push("/");
         }
-
         handleContent();
         //window.scrollTo(0,0);
     }, []);

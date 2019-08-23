@@ -1,11 +1,11 @@
 import React from 'react';
 import GlobalStyled from "../assets/GlobalStyles";
-import Router from "./Router";
+import RouterWrap from "./Router";
 
 const App = () => {
     return (
         <div className="wrapper">
-            <Router />
+            <RouterWrap />
             <GlobalStyled />
         </div>
     )
