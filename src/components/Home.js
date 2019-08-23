@@ -5,6 +5,12 @@ import Poster from "./Poster";
 
 const Container = styled.div`
     width:100%;max-width:768px;margin:0 auto;padding:0 20px;
+    .grid{
+        display:block;
+        :after{
+            content:"";display:block;clear:both;
+        }
+    }
 `;
 
 const Home = ({ movies, isLoading, savePos }) => {

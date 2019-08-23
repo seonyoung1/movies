@@ -4,18 +4,21 @@ import { createAction, handleActions } from "redux-actions";
 const PAGE_SET = "setting/PAGE_SET";
 const GET_CONTENTS = "setting/GET_CONTENTS";
 const LAST_CONTENTS_KEY = "setting/LAST_CONTENTS_KEY";
-const POS_SCROLL = "setting/POS_SCROLL";
+const SCROLL_POS = "setting/SCROLL_POS";
+const MEMORY_PASS = "setting/MEMORY_PASS";
 
 export const pageSet = createAction(PAGE_SET, number => number);
 export const getContents = createAction(GET_CONTENTS, contents => contents );
 export const contentsLastId = createAction(LAST_CONTENTS_KEY );
-export const savePosY = createAction(POS_SCROLL, y => y );
+export const scrollPos = createAction(SCROLL_POS, y => y );
+export const memoryPass = createAction(MEMORY_PASS, text => text);
 
 const initialState = {
     page: 0,
     contents: [],
     lastId: 0,
     homePos: 0,
+    prevPath: ""
 };
 
 export default handleActions({
@@ -32,9 +35,13 @@ export default handleActions({
         ...state,
         page: action.payload
     }),
-    [POS_SCROLL]: (state, action) => ({
+    [SCROLL_POS]: (state, action) => ({
         ...state,
         homePos: action.payload
+    }),
+    [MEMORY_PASS]: (state, action) => ({
+        ...state,
+        prevPath: action.payload
     }),
 
 }, initialState);

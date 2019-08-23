@@ -31,7 +31,7 @@ class HomeContainer extends Component {
     };
 
     componentDidMount() {
-        console.log(this.state.playPage, this.props.page);
+        // console.log(this.state.playPage, this.props.page);
         this.nowPlayingList(this.state.playPage);
         window.addEventListener("scroll", this.handleScroll);
     }
@@ -65,12 +65,12 @@ class HomeContainer extends Component {
         if( dataListId ===  apiListId){
             return
         }
-        console.log(`준비: api ${this.state.apiPage}, page ${this.props.page}, playPage ${this.state.playPage}`);
+        // console.log(`준비: api ${this.state.apiPage}, page ${this.props.page}, playPage ${this.state.playPage}`);
         if( this.state.apiPage !== ( this.props.page + 1 )){
             //console.log("조건이 맞지 않음");
             this.setState({ playPage: this.props.page });
             //SetActions.pageSet(this.props.page - 1); //빼야 제대로 실행
-            console.log(`재설정: api ${this.state.apiPage}, page ${this.props.page}, playPage ${this.state.playPage}`);
+            // console.log(`재설정: api ${this.state.apiPage}, page ${this.props.page}, playPage ${this.state.playPage}`);
             return
         }
         SetActions.getContents(this.state.movies);
@@ -118,8 +118,7 @@ class HomeContainer extends Component {
 
 const mapStateToProps = ({setting}) => ({
     page: setting.page,
-    contents: setting.contents,
-    leavePage: setting.leavePage,
+    contents: setting.contents
 });
 
 const mapDispatchToProps = dispatch => ({

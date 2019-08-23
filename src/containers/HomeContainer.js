@@ -7,14 +7,14 @@ import Home from "../components/Home";
 
 const useScroll = () => {
     const [isBottom, setIsBottom] = useState(true);
-    const [pos, setPos] = useState(0);
+    // const [pos, setPos] = useState(0);
     let timer;
     const handleScroll = () => {
-        setPos(window.scrollY);
+        //setPos( window.scrollY );
 
         let scrollHeight = Math.max(document.documentElement.scrollHeight, document.body.scrollHeight);
         let scrollTop = Math.max(document.documentElement.scrollTop, document.body.scrollTop);
-        let clientHeight = document.documentElement.clientHeight + 500;
+        let clientHeight = document.documentElement.clientHeight + 200;
         if( Math.floor(scrollTop + clientHeight) > scrollHeight ){
             if( ! timer ){
                 //setPlayPage(playPage + 1);
@@ -31,36 +31,17 @@ const useScroll = () => {
         window.addEventListener("scroll", handleScroll);
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
-    return [isBottom, setIsBottom, pos];
+    return [isBottom, setIsBottom];
 };
 
-const HomeContainer = ({ SetActions, page, lastId, contents, homePos, location }) => {
-    const [isBottom, setIsBottom, pos] = useScroll();
+const HomeContainer = ({ SetActions, page, lastId, contents }) => {
+    const [isBottom] = useScroll();
     const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
     const [movies, setMovies] = useState([]);
-    //const [apiPage, setApiPage] = useState(0);
     const [apiLastId, setApiLastId] = useState(null);
     const [playPage, setPlayPage] = useState(1);
-
-    const [scrollLoading, setScrollLoading] = useState(null);
-
-    // const [passName] = useState(location.pathname);
-
-    const [thisPos] = useState(homePos);
-
-
-    // useEffect(() => {
-    //     console.log(passName);
-    // }, [passName]);
-
-    useEffect(() => {
-        console.log(`출력 ${homePos} // ${thisPos}`);
-        let number = Number(thisPos);
-        window.scrollTo(0,1000);
-
-        console.log(playPage);
-    }, []);
+    // const [scrollLoading, setScrollLoading] = useState(null);
 
     useEffect(() => {
         if ( isBottom ){
@@ -82,7 +63,10 @@ const HomeContainer = ({ SetActions, page, lastId, contents, homePos, location }
                 return
             }
             //console.log(`movies save ${apiLastId}, ${lastId}, page ${page}, play ${playPage}`);
-            saveData();
+            // saveData();
+            SetActions.getContents(movies);
+            SetActions.pageSet(playPage - 1);
+            SetActions.contentsLastId();
         }
     }, [movies]);
 
@@ -101,24 +85,21 @@ const HomeContainer = ({ SetActions, page, lastId, contents, homePos, location }
         }
     };
 
-    const saveData = () => {
-        SetActions.getContents(movies);
-        SetActions.pageSet(playPage - 1);
-        SetActions.contentsLastId();
-    };
-
     const savePos = () => {
-        SetActions.savePosY(pos);
-        //console.log(pos)
+        SetActions.scrollPos(window.scrollY);
+        // console.log(`pos ${window.scrollY}`)
     };
 
     return(
-        <Home
-            movies={contents}
-            isLoading={isLoading}
-            error={error}
-            savePos={savePos}
-        />
+        <>
+            <Home
+                movies={contents}
+                isLoading={isLoading}
+                error={error}
+                savePos={savePos}
+            />
+            <p style={{position:"fixed",top:"0px",left:"0px",color:"#fff",zIndex:"100"}}>{window.scrollY}</p>
+        </>
     )
 };
 
