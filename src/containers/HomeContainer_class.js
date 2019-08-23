@@ -11,7 +11,8 @@ class HomeContainer extends Component {
         const { contents } = this.props;
         if( contents.length > 0 ) {
             this.state = {
-                dataListId: contents[contents.length - 1].id
+                dataListId: contents[contents.length - 1].id,
+                playPage: this.state.playPage === undefined ? this.props.page : this.state.playPage
             };
         }
     }
@@ -30,6 +31,7 @@ class HomeContainer extends Component {
     };
 
     componentDidMount() {
+        console.log(this.state.playPage, this.props.page);
         this.nowPlayingList(this.state.playPage);
         window.addEventListener("scroll", this.handleScroll);
     }
@@ -63,12 +65,12 @@ class HomeContainer extends Component {
         if( dataListId ===  apiListId){
             return
         }
-        //console.log(`준비: api ${this.state.apiPage}, page ${this.props.page}, playPage ${this.state.playPage}`);
+        console.log(`준비: api ${this.state.apiPage}, page ${this.props.page}, playPage ${this.state.playPage}`);
         if( this.state.apiPage !== ( this.props.page + 1 )){
             //console.log("조건이 맞지 않음");
             this.setState({ playPage: this.props.page });
             //SetActions.pageSet(this.props.page - 1); //빼야 제대로 실행
-            //console.log(`재설정: api ${this.state.apiPage}, page ${this.props.page}, playPage ${this.state.playPage}`);
+            console.log(`재설정: api ${this.state.apiPage}, page ${this.props.page}, playPage ${this.state.playPage}`);
             return
         }
         SetActions.getContents(this.state.movies);
@@ -78,7 +80,7 @@ class HomeContainer extends Component {
     handleScroll = () => {
         let scrollHeight = Math.max(document.documentElement.scrollHeight, document.body.scrollHeight);
         let scrollTop = Math.max(document.documentElement.scrollTop, document.body.scrollTop);
-        let clientHeight = document.documentElement.clientHeight + 500;
+        let clientHeight = document.documentElement.clientHeight + 10;
 
         // this.setState({scroll1: Math.floor(scrollTop + clientHeight) });
         // this.setState({scroll2: scrollHeight});
@@ -86,7 +88,9 @@ class HomeContainer extends Component {
         if( Math.floor(scrollTop + clientHeight) > scrollHeight ){
             if( !this.state.timer ){
                 //alert(`스크롤 ${scrollTop + clientHeight}, ${scrollHeight}`);
+                console.log(this.state.playPage);
                 this.setState({ playPage: this.state.playPage + 1 });
+                console.log(this.state.playPage);
                 this.nowPlayingList(this.state.playPage);
                 this.state.timer = setTimeout(() => {
                     this.setState({timer: null});

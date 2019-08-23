@@ -8,14 +8,21 @@ import Home from "../components/Home";
 const useScroll = () => {
     const [isBottom, setIsBottom] = useState(true);
     const [pos, setPos] = useState(0);
-
+    let timer;
     const handleScroll = () => {
         setPos(window.scrollY);
 
         let scrollHeight = Math.max(document.documentElement.scrollHeight, document.body.scrollHeight);
         let scrollTop = Math.max(document.documentElement.scrollTop, document.body.scrollTop);
-        let clientHeight = document.documentElement.clientHeight + 100;
+        let clientHeight = document.documentElement.clientHeight + 500;
         if( Math.floor(scrollTop + clientHeight) > scrollHeight ){
+            if( ! timer ){
+                //setPlayPage(playPage + 1);
+                timer = setTimeout(() => {
+                    timer = null;
+                    setIsBottom(false);
+                }, 500);
+            }
             setIsBottom(true);
         }
     };
@@ -27,7 +34,7 @@ const useScroll = () => {
     return [isBottom, setIsBottom, pos];
 };
 
-const HomeContainer = ({ SetActions, page, lastId, contents, posY }) => {
+const HomeContainer = ({ SetActions, page, lastId, contents, homePos, location }) => {
     const [isBottom, setIsBottom, pos] = useScroll();
     const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
@@ -36,25 +43,29 @@ const HomeContainer = ({ SetActions, page, lastId, contents, posY }) => {
     const [apiLastId, setApiLastId] = useState(null);
     const [playPage, setPlayPage] = useState(1);
 
-    const [saveY] = useState(posY);
-    let timer;
+    const [scrollLoading, setScrollLoading] = useState(null);
+
+    // const [passName] = useState(location.pathname);
+
+    const [thisPos] = useState(homePos);
+
+
+    // useEffect(() => {
+    //     console.log(passName);
+    // }, [passName]);
 
     useEffect(() => {
-        console.log(`출력 ${posY} // ${saveY}`);
-        let number = Number(saveY);
+        console.log(`출력 ${homePos} // ${thisPos}`);
+        let number = Number(thisPos);
         window.scrollTo(0,1000);
+
+        console.log(playPage);
     }, []);
 
     useEffect(() => {
         if ( isBottom ){
+            setPlayPage(playPage + 1);
             nowPlayingList(playPage);
-            if( ! timer ){
-                setPlayPage(playPage + 1);
-                timer = setTimeout(() => {
-                    timer = null;
-                    setIsBottom(false);
-                }, 500);
-            }
         }
     }, [isBottom]);
 
@@ -115,7 +126,7 @@ const mapStateToProps = ({setting}) => ({
     page: setting.page,
     contents: setting.contents,
     lastId: setting.lastId,
-    posY: setting.posY,
+    homePos: setting.homePos,
 });
 
 const mapDispatchToProps = dispatch => ({

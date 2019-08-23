@@ -15,7 +15,7 @@ const initialState = {
     page: 0,
     contents: [],
     lastId: 0,
-    posY: 0,
+    homePos: 0,
 };
 
 export default handleActions({
@@ -34,7 +34,7 @@ export default handleActions({
     }),
     [POS_SCROLL]: (state, action) => ({
         ...state,
-        posY: action.payload
+        homePos: action.payload
     }),
 
 }, initialState);

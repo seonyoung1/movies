@@ -125,7 +125,7 @@ const Detail = ({ result, isLoading, error, history }) => {
                                         <div className="item" key={item.id}>
                                             <p>{item.name}</p>
                                             <div className="youtube" key={item.key}>
-                                                <iframe src={`https://www.youtube.com/embed/${item.key}`}>
+                                                <iframe src={`https://www.youtube.com/embed/${item.key}`} title={item.name}>
                                                 </iframe>
                                             </div>
                                         </div>
