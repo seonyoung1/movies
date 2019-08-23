@@ -19,7 +19,7 @@
 - - -
  ### Issue 정리
  1. 중복
-     * 페이지를 변경(컴포넌트를 벗어나도) 할때도 첫페이지에 있는 목록을 저장하기 위해 리덕스로 contents 내역을 저장함
+     * 페이지를 변경(컴포넌트를 벗어나도) 할때도 첫페이지에 있는 목록을 저장하기 위해 리덕스로 contents 목록을 저장함
      * 처음에 무조껀 실행되기 때문에.. 자꾸 중복콜이 발생함
      * 이전에 보고있던 페이지와 호출되야 하는 페이지를 비교해서 중복 호출되면 return
      * 추가로 호출한 배열의 마지막 id 값을 서로 비교해서 중복되면 return 처리함
@@ -28,12 +28,13 @@
     * 처음 class 로 작업할 때는 브라우저의 뒤로가기 기능을 이용해도 이전에 보고 있던 곳으로 제대로 이동했으나
     * Hooks 으로 변경 이후 이유는 모르겠으나 자꾸 상단으로 붙어버림
     * 목록에서 상세로 넘어갈 때의 scrollY 의 값을 저장 후 상세에서 홈으로 돌아왔을 때만 해당위치로 이동함(scroll restoration)
-    * window.scrollTo(0, y) 가 실행되지 않아서 react-scroll 을 사용함
+    * window.scrollTo(0, y) 가 실행되지 않아서 [react-scroll](https://github.com/fisshy/react-scroll) 을 사용함
+    * pc chrome 에서는 괜찮았으나.. mobile 에서 스크롤 이동이 간헐적으로 되서 setTimeout(20) 추가함
 
  - - -
  ### Guide 정리
  1. [Scroll Restoration](https://github.com/ReactTraining/react-router/blob/master/packages/react-router-dom/docs/guides/scroll-restoration.md)
-    - 이전에 보고있던 location.pathname 을 비교해서 달라졌을 때만 부를 수 있다
+    - 이전에 보고있던 location.pathname 을 비교해서 달라졌을 때 업데이트
         ```
         const ScrollToTop = ({ children, location: { pathname } }) => {
           useEffect(() => {
