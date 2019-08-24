@@ -46,7 +46,7 @@
       "IE 11"
     ]
   },
-  "homepage": "https://seonn.netlify.com",
+  "homepage": "https://seonn.netlify.com/movies/",
   "devDependencies": {
     "gh-pages": "2.0.1"
   }

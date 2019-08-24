@@ -24,15 +24,15 @@ const Nav = styled.nav`
     }}
 `;
 
-const Navigation = ({ navIsOpen, popularPageReset }) => {
+const Navigation = ({ navIsOpen, popularPageReset, onCheckScrollToTop }) => {
     return (
         <Nav navIsOpen={navIsOpen}>
             <ul>
                 <li>
-                    <NavLink to="/" exact activeStyle={activeStyle}>Now Loading</NavLink>
+                    <NavLink to="/" exact activeStyle={activeStyle} onClick={onCheckScrollToTop}>Now Loading</NavLink>
                 </li>
                 <li>
-                    <NavLink to="/popular" onClick={popularPageReset} activeStyle={activeStyle}>popular</NavLink>
+                    <NavLink to="/popular" activeStyle={activeStyle} onClick={popularPageReset}>popular</NavLink>
                 </li>
             </ul>
         </Nav>

@@ -11,24 +11,26 @@ const HeaderContainer = ({ SetActions, PopularActions, navIsOpen }) => {
         SetActions.checkScrollToTop(true);
     };
     const onToggleNav = () => {
-        // setIsOpen( !isOpen );
+        //네비 켯다 껏다 toggle 값 저장
         SetActions.checkNavIsOpen();
     };
     const popularPageReset = () => {
         PopularActions.updateCurrentPage(1);
         PopularActions.updateStartEndPage(0, 5);
     };
+    //navIsOpen : true, false 값 props 로 전달 (네비 디자인에 사용)
 
     return (
         <>
             <Header
+                navIsOpen={navIsOpen}
                 onCheckScrollToTop={onCheckScrollToTop}
                 onToggleNav={onToggleNav}
-                navIsOpen={navIsOpen}
             />
             <Navigation
                 navIsOpen={navIsOpen}
                 popularPageReset={popularPageReset}
+                onCheckScrollToTop={onCheckScrollToTop}
             />
         </>
     );

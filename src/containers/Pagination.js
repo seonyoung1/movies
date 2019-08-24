@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import { animateScroll as scroll } from 'react-scroll'
 import {connect} from "react-redux";
 import {bindActionCreators} from "redux";
@@ -6,13 +6,8 @@ import * as popularActions from "../modules/popular";
 import Page from "../components/Page";
 
 const Pagination = ({ isLoading, pageSelect, PopularActions, current, start, end }) => {
-
-    useEffect(() => {
-        console.log(`current ${current} / start ${start} / end ${end}`);
-    }, []);
-
-    const per = 20;
-    const postCount = 500;
+    const per = 20; //보여지고 있는 리스트의 갯수
+    const postCount = 500; //총 페이지
     const total = Math.ceil(postCount/per);
     const array = [];
     for (let i=0; i<total; i++){
