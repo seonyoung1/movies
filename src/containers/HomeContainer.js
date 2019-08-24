@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as setActions from "../modules/setting";
 import { moviesApi } from "../api";
-import Home from "../components/Home";
+import List from "../components/List";
 
 const useScroll = () => {
     const [isBottom, setIsBottom] = useState(true);
@@ -14,14 +14,14 @@ const useScroll = () => {
 
         let scrollHeight = Math.max(document.documentElement.scrollHeight, document.body.scrollHeight);
         let scrollTop = Math.max(document.documentElement.scrollTop, document.body.scrollTop);
-        let clientHeight = document.documentElement.clientHeight + 200;
+        let clientHeight = document.documentElement.clientHeight + 500;
         if( Math.floor(scrollTop + clientHeight) > scrollHeight ){
             if( ! timer ){
                 //setPlayPage(playPage + 1);
                 timer = setTimeout(() => {
                     timer = null;
                     setIsBottom(false);
-                }, 500);
+                }, 250);
             }
             setIsBottom(true);
         }
@@ -82,20 +82,21 @@ const HomeContainer = ({ SetActions, page, lastId, contents }) => {
         }
     };
 
-    const savePos = () => {
+    const saveScrollPos = () => {
         SetActions.scrollPos(Math.ceil(window.scrollY));
         // alert(window.scrollY);
     };
 
     return(
         <>
-            <Home
+            <List
                 movies={contents}
                 isLoading={isLoading}
                 error={error}
-                savePos={savePos}
+                saveScrollPos={saveScrollPos}
+                pageTitle="Now Playing"
             />
-            {/*<p style={{position:"fixed",top:"0px",left:"0px",color:"#fff",zIndex:"100"}}>{window.scrollY}</p>*/}
+            {/*<p style={{position:"fixed",top:"0px",left:"0px",color:"#fff",zIndex:"100"}}>{isBottom ? "true" : "false"}</p>*/}
         </>
     )
 };

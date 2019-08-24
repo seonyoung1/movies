@@ -5,7 +5,7 @@ import empty from "../assets/images/empty.jpg";
 import styled from "styled-components";
 
 const List = styled.li`
-    float:left; width:33.3%; padding:10px; margin-bottom:10px;
+    float:left; width:25%; padding:10px; margin-bottom:10px;
     .poster{
         overflow:hidden;position:relative;width:100%;height:0;padding-top:150%;
     }
@@ -35,10 +35,10 @@ const List = styled.li`
     }
 `;
 
-const Poster = ({ id, url, title, originTitle, savePos }) => {
+const Poster = ({ id, url, title, originTitle, saveScrollPos }) => {
     return(
         <List>
-            <Link to={`/detail/${id}`} onClick={savePos}>
+            <Link to={`/detail/${id}`} onClick={saveScrollPos}>
                 <div className="poster">
                     { url !== null ? <img src={`https://image.tmdb.org/t/p/w500${url}`} alt={originTitle} /> : <img src={empty} alt="" />}
                 </div>

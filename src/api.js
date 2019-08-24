@@ -17,6 +17,12 @@ export const moviesApi = {
         },
         cache: true
     }),
+    popular: page => api.get("movie/popular",{
+        params: {
+            page: page
+        },
+        cache: true
+    }),
     search: term => api.get("search/movie",{
         params: {
             api_key: "6f26edc26d6ed9d164d9bc332258be3f",

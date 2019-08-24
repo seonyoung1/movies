@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as setActions from "../modules/setting";
 import { moviesApi } from "../api";
-import Home from "../components/Home";
+import List from "../components/List";
 
 class HomeContainer extends Component {
     constructor(props) {
@@ -104,7 +104,7 @@ class HomeContainer extends Component {
         const { isLoading, error } = this.state;
         return(
             <>
-                <Home
+                <List
                     page={page}
                     movies={contents}
                     isLoading={isLoading}
@@ -170,7 +170,7 @@ export default connect(
 //     };
 //
 //     return (
-//         <Home
+//         <List
 //             page={page}
 //             movies={movies}
 //             isLoading={isLoading}

@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from "styled-components";
+import Helmet from "react-helmet";
 import Loader from "./Loader";
 import Poster from "./Poster";
 
@@ -11,14 +12,18 @@ const Container = styled.div`
             content:"";display:block;clear:both;
         }
     }
+    h2{font-size:18px;padding:10px;font-weight:bold;}
 `;
 
-const Home = ({ movies, isLoading, savePos }) => {
-    //console.log(movies);
+const List = ({ movies, isLoading, saveScrollPos, pageTitle }) => {
     return (
         <Container>
             {isLoading ? <Loader /> :
                 <>
+                    <Helmet>
+                        <title>MOVIES</title>
+                    </Helmet>
+                    <h2>{pageTitle}</h2>
                     {movies && movies.length > 0 &&
                         <ul className="grid">
                             {movies.map(item => (
@@ -28,7 +33,7 @@ const Home = ({ movies, isLoading, savePos }) => {
                                     url={item.poster_path}
                                     originTitle={item.original_title}
                                     title={item.title}
-                                    savePos={savePos}
+                                    saveScrollPos={saveScrollPos}
                                 />
                             ))}
                         </ul>
@@ -39,4 +44,4 @@ const Home = ({ movies, isLoading, savePos }) => {
     );
 };
 
-export default Home;
+export default List;
