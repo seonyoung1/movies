@@ -24,7 +24,7 @@ const Nav = styled.nav`
     }}
 `;
 
-const Navigation = ({ navIsOpen }) => {
+const Navigation = ({ navIsOpen, popularPageReset }) => {
     return (
         <Nav navIsOpen={navIsOpen}>
             <ul>
@@ -32,7 +32,7 @@ const Navigation = ({ navIsOpen }) => {
                     <NavLink to="/" exact activeStyle={activeStyle}>Now Loading</NavLink>
                 </li>
                 <li>
-                    <NavLink to="/popular" activeStyle={activeStyle}>popular</NavLink>
+                    <NavLink to="/popular" onClick={popularPageReset} activeStyle={activeStyle}>popular</NavLink>
                 </li>
             </ul>
         </Nav>

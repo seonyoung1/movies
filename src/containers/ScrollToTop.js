@@ -4,11 +4,12 @@ import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { bindActionCreators, compose } from "redux";
 import * as setActions from "../modules/setting";
+import * as popularActions from "../modules/popular";
 
-const ScrollToTop = ({ children, location: { pathname }, SetActions, homePos, prevPath, scrollToTop, navIsOpen }) => {
+const ScrollToTop = ({ children, location: { pathname }, SetActions, homePos, PopularPos, prevPath, scrollToTop, navIsOpen }) => {
 
     useEffect(() => {
-        if( pathname === "/" || pathname === "/popular" ){
+        if( pathname === "/" ){
             if( prevPath.includes("detail") && ! scrollToTop ){
             //if( prevPath !== "" && prevPath !== "/popular" && prevPath !== "/search" && ! scrollToTop ){
                 // console.log(`스크롤 이동 ${homePos} / ${top}`);
@@ -17,6 +18,14 @@ const ScrollToTop = ({ children, location: { pathname }, SetActions, homePos, pr
                 setTimeout(() => {
                     scroll.scrollTo(homePos,{duration: 0,});
                 }, 20);
+            }
+        }
+        if( pathname === "/popular" ){
+            if( prevPath.includes("detail") && ! scrollToTop ){
+                scroll.scrollTo(PopularPos,{duration: 300, delay:500});
+                // setTimeout(() => {
+                //     scroll.scrollTo(PopularPos,{duration: 0,});
+                // }, 400);
             }
         }
         // 현재 location.pathname 저장~
@@ -38,14 +47,16 @@ const ScrollToTop = ({ children, location: { pathname }, SetActions, homePos, pr
     return children || null;
 };
 
-const mapStateToProps = ({setting}) => ({
+const mapStateToProps = ({setting, popular}) => ({
     prevPath: setting.prevPath,
     homePos: setting.homePos,
+    PopularPos: popular.PopularPos,
     scrollToTop: setting.scrollToTop,
     navIsOpen: setting.navIsOpen,
 });
 const mapDispatchToProps = dispatch => ({
-    SetActions: bindActionCreators(setActions, dispatch)
+    SetActions: bindActionCreators(setActions, dispatch),
+    PopularActions: bindActionCreators(popularActions, dispatch),
 });
 
 export default compose(

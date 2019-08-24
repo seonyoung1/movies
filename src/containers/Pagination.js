@@ -1,10 +1,15 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
+import { animateScroll as scroll } from 'react-scroll'
+import {connect} from "react-redux";
+import {bindActionCreators} from "redux";
+import * as popularActions from "../modules/popular";
 import Page from "../components/Page";
 
-const Pagination = ({ isLoading, pageSelect }) => {
-    const [start, setStart] = useState(0);
-    const [end, setEnd] = useState(5);
-    const [current, setCurrent] = useState(1);
+const Pagination = ({ isLoading, pageSelect, PopularActions, current, start, end }) => {
+
+    useEffect(() => {
+        console.log(`current ${current} / start ${start} / end ${end}`);
+    }, []);
 
     const per = 20;
     const postCount = 500;
@@ -15,13 +20,26 @@ const Pagination = ({ isLoading, pageSelect }) => {
     }
     const target = array.slice(start, end);
 
-    const updateStartEndPage = (start, end) => {
-        setStart(start);
-        setEnd(end);
+    const onStartEndPage = (start, end) => {
+        PopularActions.updateStartEndPage(start, end);
     };
-    const updateCurrentPage = page => {
-        setCurrent(page);
+    const onCurrentPage = page => {
+        PopularActions.updateCurrentPage(page);
         pageSelect(page);
+        scroll.scrollTo(0,{
+            duration: 500,
+            delay: 400
+        });
+    };
+    const onFirst = () => {
+        if( current === 1 ) return alert("This is the first page");
+        onCurrentPage(1);
+        PopularActions.updateStartEndPage(0, 5);
+    };
+    const onEnd = () => {
+        if( current === total ) return alert("This is the last page");
+        onCurrentPage(total);
+        PopularActions.updateStartEndPage(total-5, total);
     };
 
     const onPrevPage = () => {
@@ -30,9 +48,9 @@ const Pagination = ({ isLoading, pageSelect }) => {
         if( current % 5 === 1 ){
             const s = start - 5;
             const e = end - 5;
-            updateStartEndPage(s,e);
+            onStartEndPage(s,e);
         }
-        updateCurrentPage(current - 1);
+        onCurrentPage(current - 1);
     };
 
     const onNextPage = () => {
@@ -40,9 +58,9 @@ const Pagination = ({ isLoading, pageSelect }) => {
         if( current % 5 === 0 ){
             const s = start + 5;
             const e = end + 5;
-            updateStartEndPage(s,e);
+            onStartEndPage(s,e);
         }
-        updateCurrentPage(current + 1);
+        onCurrentPage(current + 1);
     };
 
     return (
@@ -52,13 +70,28 @@ const Pagination = ({ isLoading, pageSelect }) => {
                     target={target}
                     start={start}
                     current={current}
-                    updateCurrentPage={updateCurrentPage}
+                    onCurrentPage={onCurrentPage}
                     onPrevPage={onPrevPage}
                     onNextPage={onNextPage}
+                    onFirst={onFirst}
+                    onEnd={onEnd}
                 />
             }
         </>
     );
 };
 
-export default Pagination;
+const mapStateToProps = ({popular}) => ({
+    current: popular.current,
+    start: popular.start,
+    end: popular.end,
+});
+
+const mapDispatchToProps = dispatch => ({
+    PopularActions: bindActionCreators(popularActions, dispatch),
+});
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(Pagination);

@@ -1,7 +1,9 @@
 import React from 'react';
 import styled from "styled-components";
-import nextArrow from "../assets/images/right-arrow.png";
-import prevArrow from "../assets/images/left-arrow.png";
+import next from "../assets/images/right-arrow.png";
+import prev from "../assets/images/left-arrow.png";
+import first from "../assets/images/first-arrow.png";
+import last from "../assets/images/last-arrow.png";
 
 const Pagination = styled.ul`
     display:flex;justify-content:center;width:100%;max-width:768px;margin:0 auto;
@@ -11,22 +13,22 @@ const Pagination = styled.ul`
 `;
 
 
-const Page = ({ target, start, current, updateCurrentPage, onPrevPage, onNextPage }) => {
+const Page = ({ target, start, current, onCurrentPage, onPrevPage, onNextPage, onFirst, onEnd }) => {
     return (
         <Pagination>
-            {/*<button>to first page</button>*/}
+            <button onClick={() => onFirst()}><img src={first} alt="to first page" /></button>
             <li>
-                <button onClick={() => onPrevPage()}><img src={prevArrow} alt="to prev page" /></button>
+                <button onClick={() => onPrevPage()}><img src={prev} alt="to prev page" /></button>
             </li>
             {target.map((val, index) =>
                 <li key={val} className={index === (current - start - 1) ? "active" : ""}>
-                    <button onClick={() => updateCurrentPage(val)}>{val}</button>
+                    <button onClick={() => onCurrentPage(val)}>{val}</button>
                 </li>
             )}
             <li>
-                <button onClick={() => onNextPage()}><img src={nextArrow} alt="to next page" /></button>
+                <button onClick={() => onNextPage()}><img src={next} alt="to next page" /></button>
             </li>
-            {/*<button>to last page</button>*/}
+            <button onClick={() => onEnd()}><img src={last} alt="to last page" /></button>
         </Pagination>
     );
 };

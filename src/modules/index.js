@@ -1,5 +1,6 @@
 import { combineReducers } from "redux";
 import setting from "./setting";
+import popular from "./popular";
 
 /*
  * combineReducers : 여러개의 리듀서를 하나로 합쳐주는 역할
@@ -8,4 +9,5 @@ import setting from "./setting";
 
 export default combineReducers({
     setting,
+    popular,
 })

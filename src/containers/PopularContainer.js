@@ -1,13 +1,16 @@
 import React, {useState, useEffect} from 'react';
+import {connect} from "react-redux";
+import {bindActionCreators} from "redux";
+import * as popularActions from "../modules/popular";
 import {moviesApi} from "../api";
 import List from "../components/List";
 import Pagination from "./Pagination";
 
-const PopularContainer = () => {
+const PopularContainer = ({ PopularActions, current }) => {
     const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
     const [movies, setMovies] = useState([]);
-    const [playPage, setPlayPage] = useState(1);
+    const [playPage, setPlayPage] = useState(current);
 
     useEffect(() => {
         popularList(playPage);
@@ -29,6 +32,10 @@ const PopularContainer = () => {
         setPlayPage(number);
     };
 
+    const saveScrollPos = () => {
+        PopularActions.scrollPosPopular(Math.ceil(window.scrollY));
+    };
+
     return (
         <>
             <List
@@ -36,6 +43,7 @@ const PopularContainer = () => {
                 isLoading={isLoading}
                 error={error}
                 pageTitle="Popular Movies"
+                saveScrollPos={saveScrollPos}
             />
             <Pagination
                 pageSelect={pageSelect}
@@ -45,4 +53,15 @@ const PopularContainer = () => {
     );
 };
 
-export default PopularContainer;
+const mapStateToProps = ({popular}) => ({
+    current: popular.current
+});
+
+const mapDispatchToProps = dispatch => ({
+    PopularActions: bindActionCreators(popularActions, dispatch),
+});
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(PopularContainer);

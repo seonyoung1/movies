@@ -4,14 +4,19 @@ import {connect} from "react-redux";
 import * as setActions from "../modules/setting";
 import Header from "../components/Header";
 import Navigation from "../components/Navigation";
+import * as popularActions from "../modules/popular";
 
-const HeaderContainer = ({ SetActions, navIsOpen }) => {
+const HeaderContainer = ({ SetActions, PopularActions, navIsOpen }) => {
     const onCheckScrollToTop = () => {
         SetActions.checkScrollToTop(true);
     };
     const onToggleNav = () => {
         // setIsOpen( !isOpen );
         SetActions.checkNavIsOpen();
+    };
+    const popularPageReset = () => {
+        PopularActions.updateCurrentPage(1);
+        PopularActions.updateStartEndPage(0, 5);
     };
 
     return (
@@ -23,6 +28,7 @@ const HeaderContainer = ({ SetActions, navIsOpen }) => {
             />
             <Navigation
                 navIsOpen={navIsOpen}
+                popularPageReset={popularPageReset}
             />
         </>
     );
@@ -34,7 +40,8 @@ const mapStateToProps = ({setting}) => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    SetActions: bindActionCreators(setActions, dispatch)
+    SetActions: bindActionCreators(setActions, dispatch),
+    PopularActions: bindActionCreators(popularActions, dispatch),
 });
 
 export default connect(

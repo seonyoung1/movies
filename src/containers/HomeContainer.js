@@ -44,6 +44,7 @@ const HomeContainer = ({ SetActions, page, lastId, contents }) => {
 
     useEffect(() => {
         if ( isBottom ){
+            if( playPage === 1000 ) return alert("There is no more data");
             setPlayPage(playPage + 1);
             nowPlayingList(playPage);
         }
@@ -83,7 +84,7 @@ const HomeContainer = ({ SetActions, page, lastId, contents }) => {
     };
 
     const saveScrollPos = () => {
-        SetActions.scrollPos(Math.ceil(window.scrollY));
+        SetActions.scrollPosHome(Math.ceil(window.scrollY));
         // alert(window.scrollY);
     };
 
