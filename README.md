@@ -31,6 +31,9 @@
     * window.scrollTo(0, y) 가 실행되지 않아서 [react-scroll](https://github.com/fisshy/react-scroll) 을 사용함
     * pc chrome 에서는 괜찮았으나.. mobile 에서 스크롤 이동이 간헐적으로 되서 setTimeout(20) 추가함
 
+3. 페이지네이션
+    * [리액트 페이지네이션 직접 구현하기](https://medium.com/@han7096/%EB%A6%AC%EC%95%A1%ED%8A%B8-%ED%8E%98%EC%9D%B4%EC%A7%80%EB%84%A4%EC%9D%B4%EC%85%98-%EA%B5%AC%ED%98%84%ED%95%98%EA%B8%B0-eb4f0f4a1da0) 참고하여 작성함
+
  - - -
  ### Guide 정리
  1. [Scroll Restoration](https://github.com/ReactTraining/react-router/blob/master/packages/react-router-dom/docs/guides/scroll-restoration.md)
@@ -47,5 +50,5 @@
     ```
      
  ## 추가해볼 내용
- - [ ] gnb 삽입
- - [ ] 페이지네이션으로 나오는 페이지 만들어보기
+ - [x] gnb 삽입
+ - [x] 페이지네이션으로 나오는 페이지 만들어보기

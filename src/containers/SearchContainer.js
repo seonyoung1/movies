@@ -13,7 +13,6 @@ const SearchContainer = () => {
         e.preventDefault();
         if( keyword !== "" ){
             handleContent();
-            //console.log(result);
         }
     };
 

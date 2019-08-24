@@ -1,10 +1,10 @@
 import React from 'react';
-import {bindActionCreators} from "redux";
 import {connect} from "react-redux";
+import {bindActionCreators} from "redux";
 import * as setActions from "../modules/setting";
+import * as popularActions from "../modules/popular";
 import Header from "../components/Header";
 import Navigation from "../components/Navigation";
-import * as popularActions from "../modules/popular";
 
 const HeaderContainer = ({ SetActions, PopularActions, navIsOpen }) => {
     const onCheckScrollToTop = () => {

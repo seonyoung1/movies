@@ -7,11 +7,8 @@ import List from "../components/List";
 
 const useScroll = () => {
     const [isBottom, setIsBottom] = useState(true);
-    // const [pos, setPos] = useState(0);
     let timer;
     const handleScroll = () => {
-        //setPos( window.scrollY );
-
         let scrollHeight = Math.max(document.documentElement.scrollHeight, document.body.scrollHeight);
         let scrollTop = Math.max(document.documentElement.scrollTop, document.body.scrollTop);
         let clientHeight = document.documentElement.clientHeight + 500;
@@ -51,6 +48,7 @@ const HomeContainer = ({ SetActions, page, lastId, contents }) => {
     }, [isBottom]);
 
     useEffect(() => {
+        //상세페이지에서 뒤로 넘어왔을 때 중복 및 오류 방지
         if( movies.length > 0 ){
             if( apiLastId === lastId ){
                 //console.log("key 중복!");
@@ -63,7 +61,7 @@ const HomeContainer = ({ SetActions, page, lastId, contents }) => {
             }
             //console.log(`movies save ${apiLastId}, ${lastId}, page ${page}, play ${playPage}`);
             SetActions.getContents(movies);
-            SetActions.pageSet(playPage - 1);
+            SetActions.updatePage(playPage - 1);
             SetActions.contentsLastId();
         }
     }, [movies]);
@@ -74,7 +72,6 @@ const HomeContainer = ({ SetActions, page, lastId, contents }) => {
             let apiLastIdSave = res.data.results[res.data.results.length-1].id; //api 마지막 번호 가져오기 (중복체크)
             let movie = res.data.results;
             setApiLastId(apiLastIdSave);
-            //setApiPage(res.data.page);
             setMovies([...movie]);
         } catch {
             setError("Failed");
@@ -85,7 +82,6 @@ const HomeContainer = ({ SetActions, page, lastId, contents }) => {
 
     const saveScrollPos = () => {
         SetActions.scrollPosHome(Math.ceil(window.scrollY));
-        // alert(window.scrollY);
     };
 
     return(

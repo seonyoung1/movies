@@ -1,7 +1,7 @@
 import { createAction, handleActions } from "redux-actions";
 
 //액션타입정의 :
-const PAGE_SET = "setting/PAGE_SET";
+const UPDATE_PAGE = "setting/UPDATE_PAGE";
 const GET_CONTENTS = "setting/GET_CONTENTS";
 const LAST_CONTENTS_KEY = "setting/LAST_CONTENTS_KEY";
 const SCROLL_POS_HOME = "setting/SCROLL_POS";
@@ -9,7 +9,7 @@ const MEMORY_PATH = "setting/MEMORY_PATH";
 const SCROLL_TO_TOP = "setting/SCROLL_TO_TOP";
 const NAV_IS_OPEN = "setting/NAV_IS_OPEN";
 
-export const pageSet = createAction(PAGE_SET, number => number); //List 불러온 page 저장
+export const updatePage = createAction(UPDATE_PAGE, number => number); //List 불러온 page 저장
 export const getContents = createAction(GET_CONTENTS, contents => contents ); //List contents 저장
 export const contentsLastId = createAction(LAST_CONTENTS_KEY ); //List contents 의 불러온 컨텐츠 배열의 마지막 id 저장
 export const scrollPosHome = createAction(SCROLL_POS_HOME, y => y ); //scrollY 값 저장 Home
@@ -25,7 +25,7 @@ const initialState = {
     homePos: 0,
     PopularPos: 0,
     prevPath: "",
-    scrollToTop: false,
+    scrollIsTop: false,
     navIsOpen: false,
 };
 
@@ -39,7 +39,7 @@ export default handleActions({
         ...state,
         lastId: state.contents[state.contents.length - 1].id,
     }),
-    [PAGE_SET]: (state, action) => ({
+    [UPDATE_PAGE]: (state, action) => ({
         ...state,
         page: action.payload
     }),
@@ -53,7 +53,7 @@ export default handleActions({
     }),
     [SCROLL_TO_TOP]: (state, action) => ({
         ...state,
-        scrollToTop: action.payload
+        scrollIsTop: action.payload
     }),
     [NAV_IS_OPEN]: (state, action) => ({
         ...state,
