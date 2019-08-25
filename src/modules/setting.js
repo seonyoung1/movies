@@ -12,8 +12,8 @@ const NAV_IS_OPEN = "setting/NAV_IS_OPEN";
 export const updatePage = createAction(UPDATE_PAGE, number => number); //List 불러온 page 저장
 export const getContents = createAction(GET_CONTENTS, contents => contents ); //List contents 저장
 export const contentsLastId = createAction(LAST_CONTENTS_KEY ); //List contents 의 불러온 컨텐츠 배열의 마지막 id 저장
-export const scrollPosHome = createAction(SCROLL_POS_HOME, y => y ); //scrollY 값 저장 Home
-export const memoryPassName = createAction(MEMORY_PATH, text => text); //이전에 보고있던 location.passName (현재 페이지 바로 전)
+export const updatePosHome = createAction(SCROLL_POS_HOME, y => y ); //scrollY 값 저장 Home
+export const updatePathName = createAction(MEMORY_PATH, text => text); //이전에 보고있던 location.passName (현재 페이지 바로 전)
 export const checkScrollToTop = createAction(SCROLL_TO_TOP, value => value); //top 으로 이동할지, 보고있던 곳으로 이동할지 체크
 export const checkNavIsOpen = createAction(NAV_IS_OPEN);
 

@@ -18,9 +18,9 @@ const PopularContainer = ({ PopularActions, current }) => {
 
     const popularList = async (number) => {
         try{
+            setIsLoading(true);
             const { data: { results : result }} = await moviesApi.popular(number);
             setMovies([...result]);
-
         } catch {
             setError("Failed");
         } finally {

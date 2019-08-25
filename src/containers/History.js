@@ -6,7 +6,7 @@ import { bindActionCreators, compose } from "redux";
 import * as setActions from "../modules/setting";
 import * as popularActions from "../modules/popular";
 
-const ScrollToTop = ({ children, location: { pathname }, SetActions, homePos, PopularPos, prevPath, scrollIsTop, navIsOpen }) => {
+const History = ({ children, location: { pathname }, SetActions, homePos, PopularPos, prevPath, scrollIsTop, navIsOpen }) => {
 
     useEffect(() => {
         if( pathname === "/" ){
@@ -27,7 +27,7 @@ const ScrollToTop = ({ children, location: { pathname }, SetActions, homePos, Po
         }
         // 현재 location.pathname 저장~
         // console.log(`pathname ${pathname} // homePos ${homePos}`);
-        SetActions.memoryPassName(pathname);
+        SetActions.updatePathName(pathname);
 
         // nav 가 열려있을 때 페이지가 바뀌면 닫힘, toggle 형식
         // console.log(navIsOpen);
@@ -59,4 +59,4 @@ const mapDispatchToProps = dispatch => ({
 export default compose(
     withRouter,
     connect(mapStateToProps, mapDispatchToProps)
-)(ScrollToTop);
+)(History);

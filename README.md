@@ -41,14 +41,14 @@
  1. [Scroll Restoration](https://github.com/ReactTraining/react-router/blob/master/packages/react-router-dom/docs/guides/scroll-restoration.md)
     - 이전에 보고있던 location.pathname 을 비교해서 달라졌을 때 업데이트
     ```
-    const ScrollToTop = ({ children, location: { pathname } }) => {
+    const History = ({ children, location: { pathname } }) => {
         useEffect(() => {
             window.scrollTo(0, 0);
         }, [pathname]);
         
         return children || null;
     };
-    export default withRouter(ScrollToTop);
+    export default withRouter(History);
     ```
      
  ## 추가해볼 내용

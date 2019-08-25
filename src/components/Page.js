@@ -6,8 +6,8 @@ import first from "../assets/images/first-arrow.png";
 import last from "../assets/images/last-arrow.png";
 
 const Pagination = styled.ul`
-    display:flex;justify-content:center;width:100%;max-width:768px;margin:0 auto;
-    button{display:flex;justify-content:center;margin:0 8px;width:20px;height:20px;border-radius:50%;}
+    display:flex;justify-content:center;width:100%;max-width:768px;margin:30px auto 0;
+    button{display:flex;justify-content:center;margin:0 8px;width:30px;height:30px;border-radius:50%;}
     button img{width:15px;}
     .active button{font-weight:bold;background-color:#00cec9;color:#fff;}
 `;

@@ -17,6 +17,7 @@ const HeaderContainer = ({ SetActions, PopularActions, navIsOpen }) => {
     const popularPageReset = () => {
         PopularActions.updateCurrentPage(1);
         PopularActions.updateStartEndPage(0, 5);
+        onCheckScrollToTop();
     };
     //navIsOpen : true, false 값 props 로 전달 (네비 디자인에 사용)
 

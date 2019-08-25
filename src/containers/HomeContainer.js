@@ -81,7 +81,7 @@ const HomeContainer = ({ SetActions, page, lastId, contents }) => {
     };
 
     const saveScrollPos = () => {
-        SetActions.scrollPosHome(Math.ceil(window.scrollY));
+        SetActions.updatePosHome(Math.ceil(window.scrollY));
     };
 
     return(

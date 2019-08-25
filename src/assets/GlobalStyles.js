@@ -32,7 +32,7 @@ const GlobalStyled = createGlobalStyle`
         cursor:pointer
     }
     .wrapper{
-        padding:70px 0 50px;
+        padding:70px 0 100px;
     }
 `;
 
