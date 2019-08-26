@@ -41,7 +41,7 @@ const HomeContainer = ({ SetActions, page, lastId, contents }) => {
 
     useEffect(() => {
         if ( isBottom ){
-            if( playPage === 1000 ) return alert("There is no more data");
+            if( playPage > 50 ) return alert("There is no more data");
             setPlayPage(playPage + 1);
             nowPlayingList(playPage);
         }
