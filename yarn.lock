@@ -1961,10 +1961,10 @@ axios-extensions@^3.0.6:
     tslib "^1.9.0"
     util "^0.11.1"
 
-axios@^0.19.0:
-  version "0.19.0"
-  resolved "https://registry.yarnpkg.com/axios/-/axios-0.19.0.tgz#8e09bff3d9122e133f7b8101c8fbdd00ed3d2ab8"
-  integrity sha512-1uvKqKQta3KBxIz14F2v06AEHZ/dIoeKfbTRkK1E5oqjDnuEerLmYTgJB5AiQZHJcljpg1TuRzdjDR06qNk0DQ==
+axios@0.18.1:
+  version "0.18.1"
+  resolved "https://registry.yarnpkg.com/axios/-/axios-0.18.1.tgz#ff3f0de2e7b5d180e757ad98000f1081b87bcea3"
+  integrity sha512-0BfJq4NSfQXd+SkFdrvFbG7addhYSBA2mQwISr46pD6E5iqkWg02RAs8vyTT/j0RTnoYmeXauBuSv1qKwR179g==
   dependencies:
     follow-redirects "1.5.10"
     is-buffer "^2.0.2"
@@ -8673,16 +8673,6 @@ react-router-dom@^5.0.1:
     tiny-invariant "^1.0.2"
     tiny-warning "^1.0.0"
 
-react-router-scroll-memory@^2.0.3:
-  version "2.0.3"
-  resolved "https://registry.yarnpkg.com/react-router-scroll-memory/-/react-router-scroll-memory-2.0.3.tgz#b3ad3e2d147688e05242abb68002378e674396da"
-  integrity sha512-JSInrXVbFcRJ4jb2Q8nWApSvE/zf+H3pB73Th7uYQsypPDka9RGoobGWxuSVQDLURrPvQ8DOED+5r68He22qoQ==
-
-react-router-scroll-top@^0.2.1:
-  version "0.2.1"
-  resolved "https://registry.yarnpkg.com/react-router-scroll-top/-/react-router-scroll-top-0.2.1.tgz#7fc28b9636d64b2d42a24b5b64eb4bd4219a672b"
-  integrity sha512-rseL7IqA9wt1R/QIGbTFsO5O1bIXmd0f+W208rKsAYjedSrNCsu3Q8yLJZtBmdESakfAZJRGw5A6FJwRkbvQ+A==
-
 react-router@5.0.1:
   version "5.0.1"
   resolved "https://registry.yarnpkg.com/react-router/-/react-router-5.0.1.tgz#04ee77df1d1ab6cb8939f9f01ad5702dbadb8b0f"
@@ -8759,13 +8749,6 @@ react-scripts@3.1.1:
     workbox-webpack-plugin "4.3.1"
   optionalDependencies:
     fsevents "2.0.7"
-
-react-scroll-manager@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/react-scroll-manager/-/react-scroll-manager-1.0.0.tgz#027060b23807bd9e035eee15096ec1f612f46ff4"
-  integrity sha512-+FeAvT4Jdte7pApbfZuPcTUN0DIIl5zQ7oaTdTLXXDrMbguSa5bpfXvDA7MnbSi4vD8AzHXtpGSNZVTGGmjU6w==
-  dependencies:
-    prop-types "^15.6.2"
 
 react-scroll@^1.7.13:
   version "1.7.13"
