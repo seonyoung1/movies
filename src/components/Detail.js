@@ -136,7 +136,7 @@ const Detail = ({ result, isLoading, error, history }) => {
                             </div>
                         )}
                         <div className="group">
-                            <button className="go_home" onClick={() => history.goBack()}>HOME</button>
+                            <button className="go_home" onClick={() => history.push("/")}>BACK</button>
                         </div>
 
                     </Container>
