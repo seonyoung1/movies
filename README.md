@@ -32,6 +32,16 @@
     * 목록에서 상세로 넘어갈 때의 scrollY 의 값을 저장 후 상세에서 홈으로 돌아왔을 때만 해당위치로 이동함(scroll restoration)
     * window.scrollTo(0, y) 가 실행되지 않아서 [react-scroll](https://github.com/fisshy/react-scroll) 을 사용함
     * pc chrome 에서는 괜찮았으나.. mobile 에서 스크롤 이동이 간헐적으로 되서 setTimeout(20) 추가함
+    * 2019.09.04 추가
+        - 클릭할 때 scrollY 값 저장하여 뒤로가기 했을 때 해당위치로 이동 에서 클릭했던 박스의 target(name) 으로 변경함
+        - offset 은 header 의 height 값, 버그(?)인지 duration 값을 변경해도 0으로 밖에 이동안함
+        - setTimeout 추가 안하면 인식못하는지 이동못함
+            ```
+            const resId = `el-${prevPath.split("/")[2]}`;
+            setTimeout(() => {
+                scroller.scrollTo(resId,{duration: 0, offset: -60,});
+            }, 20);
+            ```
 
 3. 페이지네이션
     * [리액트 페이지네이션 직접 구현하기](https://medium.com/@han7096/%EB%A6%AC%EC%95%A1%ED%8A%B8-%ED%8E%98%EC%9D%B4%EC%A7%80%EB%84%A4%EC%9D%B4%EC%85%98-%EA%B5%AC%ED%98%84%ED%95%98%EA%B8%B0-eb4f0f4a1da0) 참고하여 작성함
