@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { animateScroll as scroll } from 'react-scroll'
+import { useEffect } from 'react';
+import { animateScroll as scroll, scroller } from 'react-scroll'
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import { bindActionCreators, compose } from "redux";
@@ -14,15 +14,25 @@ const History = ({ children, location: { pathname }, SetActions, homePos, Popula
             //if( prevPath !== "" && prevPath !== "/popular" && prevPath !== "/search" && ! scrollIsTop ){
                 // console.log(`스크롤 이동 ${homePos} / ${top}`);
                 // 현재 보고있는 페이지가 / or /popular 일때, 이전에 넘어온 페이지가 detail 이고, top 으로 이동이 아니면 실행
-                scroll.scrollTo(homePos,{duration: 0,});
+                // scroll.scrollTo(homePos,{duration: 0,});
+                // setTimeout(() => {
+                //     scroll.scrollTo(homePos,{duration: 0,});
+                // }, 20);
+
+                //target 위치로 이동
+                const resId = `el-${prevPath.split("/")[2]}`;
                 setTimeout(() => {
-                    scroll.scrollTo(homePos,{duration: 0,});
+                    scroller.scrollTo(resId,{duration: 0, offset: -60,});
                 }, 20);
             }
         }
         if( pathname === "/popular" ){
             if( prevPath.includes("detail") && ! scrollIsTop ){
-                scroll.scrollTo(PopularPos,{duration: 300, delay:500});
+                // scroll.scrollTo(PopularPos,{duration: 300, delay:500});
+                const resId = `el-${prevPath.split("/")[2]}`;
+                setTimeout(() => {
+                    scroller.scrollTo(resId,{duration: 0, offset: -60,});
+                }, 20);
             }
         }
         // 현재 location.pathname 저장~

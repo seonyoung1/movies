@@ -1,5 +1,6 @@
 import React from 'react';
 import {Link} from "react-router-dom";
+import { Element } from 'react-scroll'
 import Dotdotdot from "react-dotdotdot";
 import empty from "../assets/images/empty.jpg";
 import styled from "styled-components";
@@ -38,17 +39,19 @@ const List = styled.li`
 const Poster = ({ id, url, title, originTitle, saveScrollPos }) => {
     return(
         <List>
-            <Link to={`/detail/${id}`} onClick={saveScrollPos}>
-                <div className="poster">
-                    { url !== null ? <img src={`https://image.tmdb.org/t/p/w500${url}`} alt={originTitle} /> : <img src={empty} alt="" />}
-                </div>
-                <div className="title">
-                    <Dotdotdot clamp={2}>
-                        <p className="original">{originTitle}</p>
-                    </Dotdotdot>
-                    <p className="eng">{title}</p>
-                </div>
-            </Link>
+            <Element name={`el-${id}`} className={`el-${id}`}>
+                <Link to={`/detail/${id}`} onClick={saveScrollPos}>
+                    <div className="poster">
+                        { url !== null ? <img src={`https://image.tmdb.org/t/p/w500${url}`} alt={originTitle} /> : <img src={empty} alt="" />}
+                    </div>
+                    <div className="title">
+                        <Dotdotdot clamp={2}>
+                            <p className="original">{originTitle}</p>
+                        </Dotdotdot>
+                        <p className="eng">{title}</p>
+                    </div>
+                </Link>
+            </Element>
         </List>
     )
 };
