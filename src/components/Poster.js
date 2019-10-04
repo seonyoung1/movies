@@ -1,6 +1,6 @@
 import React from 'react';
 import {Link} from "react-router-dom";
-import { Element } from 'react-scroll'
+import { Element } from 'react-scroll';
 import Dotdotdot from "react-dotdotdot";
 import empty from "../assets/images/empty.jpg";
 import styled from "styled-components";
