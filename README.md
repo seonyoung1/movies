@@ -1,11 +1,25 @@
 # MOVIES
 
-[THE MOVIE DB](https://developers.themoviedb.org/3/getting-started/introduction) 에서 API 받아서 만들어 본 연습용 영화정보 사이트
+> [THE MOVIE DB](https://developers.themoviedb.org/3/getting-started/introduction) 에서 API 받아서 만들어 본 연습용 영화정보 사이트
+> [사이트보기](https://seonn.netlify.com/)
 
-[사이트보기](https://seonn.netlify.com/)
+## 개발환경
+> create-react-app
 
+## 사용한 라이브러리
 
-## infinite scroll (도움받은 사이트)
+* axios
+* react-dotdotdot
+* react-helmet
+* react-redux
+* react-scroll
+* redux
+* redux-actions
+* styled-components
+
+## 기타
+
+### infinite scroll (도움받은 사이트)
 
 - [Dnote 6 - 1. React - 무한 스크롤링 기능 구현](https://velog.io/@killi8n/Dnote-6-1.-React-%EB%AC%B4%ED%95%9C-%EC%8A%A4%ED%81%AC%EB%A1%A4%EB%A7%81-%EA%B8%B0%EB%8A%A5-%EA%B5%AC%ED%98%84.-79jmep7xes)
     - redux action 부분을 참고
@@ -60,7 +74,3 @@
     };
     export default withRouter(History);
     ```
-     
- ## 추가해볼 내용
- - [x] gnb 삽입
- - [x] 페이지네이션으로 나오는 페이지 만들어보기
