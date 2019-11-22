@@ -1,6 +1,6 @@
 # MOVIES
 > [THE MOVIE DB](https://developers.themoviedb.org/3/getting-started/introduction) 에서 API 받아서 만들어 본 연습용 영화정보 사이트
-> [사이트보기](https://seony-movies.netlify.com/)
+> [사이트보기](https://seony-movies.netlify.com/){: target="_blank" }
 
 ## 개발환경
 > create-react-app
